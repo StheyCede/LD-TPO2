@@ -1,4 +1,4 @@
-#TPO 2 Lenguajes Declarativos: Las Seis Mujeres del Té
+## TPO 2 Lenguajes Declarativos: Las Seis Mujeres del Té
 
 Juego web interactivo que combina JavaScript, SWI-Prolog para resolver un puzzle lógico basado en posiciones y características de seis mujeres en una mesa.
 Además, se utiliza la librería WASM para la implementación del archivo Prolog en la página web.
