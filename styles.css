@@ -1,443 +1,477 @@
-    
-    /*fuentes que se utilizan para los textos principales de la pagina*/
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Great+Vibes&display=swap');    
-    @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+/*fuentes que se utilizan para los textos principales de la pagina*/
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 
-    
-    body {
-        font-family: 'Cormorant Garamond', serif; 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100vh;
-        background-color: #f8f4e3;
-        padding: 30px; 
-        color: #4A4A4A;
-        line-height: 1.6; 
-        box-sizing: border-box;
-        position: relative;
-    }
+body {
+    font-family: 'Cormorant Garamond', serif;
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para apilar elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    min-height: 100vh;
+    background-color: #f8f4e3;
+    padding: 30px;
+    color: #4A4A4A;
+    line-height: 1.6;
+    box-sizing: border-box;
+    position: relative; /* Mantenemos relativo para el posicionamiento fijo de hijos */
+}
 
-    /* título principal en la parte superior */
-    h1 {
-        position:fixed;
-        top: 0px;
-        font-family: 'Libre Baskerville', serif; 
-        font-weight: 700;
-        font-size: 2.3em;
-        color: #8B4513; 
-        margin-bottom: 25px;
-        margin-left: 30px; 
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Sutil sombra para dar profundidad */
-        letter-spacing: 1px; /* Un poco de espaciado entre letras */
-    }
+/* título principal en la parte superior */
+h1 {
+    /* Ya no está fijo, estará en el flujo normal de la parte superior del body */
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 2.3em;
+    color: #8B4513;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    letter-spacing: 1px;
+    text-align: center; /* Centra el título mismo */
+    width: 100%; /* Ocupa el ancho completo para centrar */
+}
 
-    /* formato de salida de texto o resultados */
-    #output {
-        font-family: 'Libre Baskerville',serif;
-        font-size: 14px;
-    }
+/* formato de salida de texto o resultados */
+#output {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+}
 
-    /* contenedor general para el juego (cartas +  mesa) */
-    .game-layout {
-        display: flex; 
-        flex-direction: row; 
-        justify-content: center;
-        align-items: flex-start; 
-        gap: 30px; 
-        width: 100%;
-        max-width: 2200px; 
-        margin-top: 25px;
-        margin-left: 0;
-        margin-right: auto;
-    }
+/* Contenedor principal para las tres columnas de contenido */
+.main-content-wrapper {
+    display: flex;
+    flex-direction: row; /* Organiza los hijos en una fila */
+    justify-content: center; /* Centra el contenido si hay espacio extra */
+    align-items: flex-start; /* Alinea los elementos al inicio (arriba) de sus contenedores */
+    gap: 30px; /* Espacio entre columnas */
+    width: 100%;
+    max-width: 1800px; /* Ajusta según el tamaño de tu pantalla */
+    margin-top: 20px; /* Espacio desde el título */
+}
 
-    /* contenedor para las cartas (de mujeres cientificas y caracteristicas) */
-    .cards-container {
-        display: flex;
-        flex-direction: column; 
-        gap: 0px; 
-        width: 40%; 
-        min-width: 300px;
-        max-width: 380px;
-        margin-right: 80px;
-    }
+/* Contenedor de la columna izquierda (pistas y salida) */
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre las pistas y la salida */
+}
 
-    /*formato de contenedores */
-    .contenedor-cartas, .contenedor-condiciones {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        padding: 10px;
-        background-color: #ffffff;
-        border-radius: 15px;
-        box-shadow: 4px 4px 12px rgba(0,0,0,0.15);
-        width: 350px; 
-        justify-content: center;
-        border: 2px solid #D2B48C;
-        position: relative; 
-        overflow: hidden; 
-        margin-top: 20px;
-    }
-    
-    /* subtítulos dentro de los contenedores */
-    .contenedor-cartas h2, .contenedor-condiciones h2 {
-        font-family: 'Playfair Display', serif; 
-        font-weight: 600;
-        width: 100%;
-        text-align: center;
-        color: #7B3F00; 
-        margin-bottom: 15px;
-        text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05);
-        margin-top: 10px;
-    }
+/* Contenedor de la columna central (instrucciones, mesa y botones) */
+.middle-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente dentro de esta columna */
+    gap: 20px; /* Espacio entre instrucciones, mesa y botones */
+    width: 700px;
+}
 
-    /* condiciones: listadas verticalmente, a la izq*/
-    .contenedor-condiciones {
-        flex-direction: column; 
-        align-items: flex-start; 
-        margin-left: -80px;
-        width: 380px;
-    }
-
-    /* quitamos viñetas y márgenes de la lista de condiciones */
-    .contenedor-condiciones ul {
-        list-style: none; 
-        padding: 0;
-        margin: 0;
-        width: 100%;
-    }
-
-    /* estilos de cada condición individual */
-    .contenedor-condiciones li {
-        margin-bottom: 8px;
-        padding-left: 25px;
-        position: relative;
-        font-size: 1.2em;
-        line-height: 1.5;
-        color: #555;
-    }
-
-    .contenedor-condiciones li::before {
-        content: "•";
-        color: #8B4513; 
-        font-weight: bold;
-        display: inline-block;
-        width: 1em;
-        font-size: 1.2em; 
-        transform: translateY(-2px);
-        margin-left: 1%;
-    }
-    
-    /* contenedor donde se muestra la salida de la interacción del usuario*/
-    .contenedor-salida {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px 20px;
-        background-color: #ffffff;
-        border-radius: 15px;
-        box-shadow: 4px 4px 12px rgba(0,0,0,0.15);
-        width: 300px;
-        min-height: 200px;
-        border: 2px solid #D2B48C;
-        position: relative;
-        overflow: hidden;
-        margin-top: 20px;
-        margin-left: 70px;
-    }
-    
-    /* título dentro de la salida */
-    .contenedor-salida h2 {
-        font-family: 'Playfair Display', serif;
-        font-weight: 600;
-        width: 100%;
-        text-align: center;
-        color: #7B3F00;
-        margin-bottom: 15px;
-        text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05);
-        margin-top: 10px;
-    }
-    
-    /*formato del resultado de la salida*/
-    .contenedor-salida pre {
-        font-family: 'Cormorant Garamond', serif;
-        color: #5C4033;
-        text-align: center;
-        font-size: 1.1em;
-        white-space: pre-wrap;
-        width: 100%;
-    }
-
-    
-    /* carta base: para mujeres cientificas y características */
-
-    .carta {
-        width: 120px;
-        height: 80px;
-        background-color: #FDFCEE; 
-        border: 1px solid #CCA080; 
-        border-radius: 8px;
-        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.18);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: 600;
-        font-size: 1.2em;
-        cursor: grab;
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s;
-        position: relative;
-    }
-
-    /*efectos de la carta */
-    .carta:hover {
-        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
-        transform: translateY(-3px);
-    }
-
-    .carta:active {
-        cursor: grabbing;
-        transform: scale(0.97);
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    /*variantes de los dos tipos de cartas posibles*/
-    .persona-carta {
-        background-color: #F8E8E8; 
-        border-color: #E6B0AA; 
-        color: #9A2C2C; 
-    }
-
-    .caracteristica-carta {
-        background-color: #E8F5E8; 
-        border-color: #A7D7B7;
-        color: #388E3C; 
-        font-size: 1.2em;
-        text-align: center;
-        line-height: 1.3;
-        padding: 5px;
-    }
-
-    /* efecto visual mientras se arrastra una carta */
-    .dragging {
-        opacity: 0.6;
-        border: 2px dashed #B17E4C;
-        box-shadow: none;
-    }
-
-    /* propiedades de la mesa circular */
-    #mesa-circular {
-        position: relative;
-        width: 400px;
-        height: 400px;
-        border-radius: 50%;
-        background-color: #e6b97e; /* base neutra */
-        background-image: 
-            linear-gradient(45deg, #e8a870 25%, transparent 25%, transparent 75%, #e8a870 75%, #e8a870),
-            linear-gradient(45deg, #f6d3b3 25%, transparent 25%, transparent 75%, #f6d3b3 75%, #f6d3b3);
-        background-size: 20px 20px;
-        background-position: 0 0, 10px 10px;
-        border: 8px double #8B4513;
-        margin-top: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: inset 0 0 15px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.25);
-        flex-shrink: 0;
-        transition: transform 0.3s ease-in-out;
-        margin-right: 0px;
-    }
-    
-
-    /* texto dentro de la mesa */
-
-    #mesa-circular::before {
-        content: "Mesa de Té";
-        font-family: 'Great Vibes', cursive; 
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 2.4em; 
-        font-weight: bolder; 
-        color: rgba(150, 113, 45, 0.6); 
-        text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
-        letter-spacing: 2px;
-
-    }
-
-    /* definición de los asientos alrededor de la mesa */
-    .asiento-zona {
-        position: absolute;
-        width: 120px; 
-        height: 150px; 
-        border: 2px dashed #B17E4C; 
-        border-radius: 15px; 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        background-color: rgba(255, 255, 255, 0.85); 
-        color: #666;
-        font-size: 0.9em; 
-        transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.15); 
-        padding: 6px;
-    }
-    
-    /* estado al arrastrar sobre un asiento */
-    .asiento-zona.dragover {
-        background-color: #E6F5E6;
-        border-color: #8B4513;
-        box-shadow: 0 0 18px rgba(139, 69, 19, 0.6); 
-    }
-
-    /*formato del texto del asiento */
-    .asiento-zona p {
-        margin: 0;
-        padding: 5px;
-        font-weight: bold;
-        color: #7B3F00; 
-    }
-
-    /* posicionamiento específico de cada asiento alrededor de la mesa (la rodean) */
-    .asiento-zona:nth-child(1) { top: 0px; left: 50%; transform: translate(-50%, -50%); }
-    .asiento-zona:nth-child(2) { top: 90px; right: 0px; transform: translate(50%, -50%); }
-    .asiento-zona:nth-child(3) { bottom: 90px; right: 0px; transform: translate(50%, 50%); }
-    .asiento-zona:nth-child(4) { bottom: 0px; left: 50%; transform: translate(-50%, 50%); }
-    .asiento-zona:nth-child(5) { bottom: 90px; left: 0px; transform: translate(-50%, 50%) ; }
-    .asiento-zona:nth-child(6) { top: 90px; left: 0px; transform: translate(-50%, -50%) ; }
-
-    /* cartas dentro de los asientos */
-    .asiento-zona > .carta {
-        transform: rotate(0deg) !important;
-        margin-bottom: 5px;
-    }
-
-    .asiento-persona-slot, .asiento-caracteristica-slot {
-        width: 100px; 
-        height: 65px; 
-        border: 1px dashed #A08060; 
-        border-radius: 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 0.8em; 
-        color: #888;
-        margin: 3px; 
-        background-color: rgba(255,255,255,0.7);
-        overflow: hidden;
-        font-weight: 500;
-    }
-    .asiento-persona-slot.dragover, .asiento-caracteristica-slot.dragover {
-        background-color: #F0FFE0; 
-        border-color: #8B4513;
-    }
-
-    /* posicionamiento de los botones */
-    .botones {
-        position: absolute;
-        top: 800px;
-        left: 850px;
-        display: flex;
-        flex-direction: row;
-        gap: 15px;   
-    }
+/* Contenedor de la columna derecha (cartas) */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre los contenedores de cartas */
+}
 
 
-    /* estilo de los botones */
-    button {
-        padding: 12px 25px; 
-        font-size: 1.05em; 
-        background-color: #A0522D; 
-        color: white;
-        border: 2px solid #8B4513; 
-        border-radius: 8px; 
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.1s ease;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        letter-spacing: 0.5px;
-        font-weight: bold;
-        font-family: 'Playfair Display', serif; 
-    }
+/* contenedor para las cartas (de mujeres cientificas y caracteristicas) */
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    width: 100%; /* Ocupará el ancho completo de su padre (.right-column) */
+    min-width: 300px;
+    max-width: 380px;
+    /* margin-right: 80px; Eliminado, el padre maneja el espaciado */
+}
 
-    /* efecto al pasar el mouse sobre el botón */
-    button:hover {
-        background-color: #8B4513; 
-        transform: translateY(-2px);
-        box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
-    }
+/* formato de contenedores */
+.contenedor-cartas, .contenedor-condiciones, .contenedor-salida { /* Añadido .contenedor-salida aquí */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.15);
+    width: 350px; /* Ancho fijo ajustado */
+    justify-content: center;
+    border: 2px solid #D2B48C;
+    position: relative;
+    overflow: hidden;
+    /* margin-top: 20px; Eliminado, el padre maneja el espaciado */
+}
 
-    /* efecto al presionar el botón*/
-    button:active {
-        transform: translateY(0);
-        box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    }
+/* subtítulos dentro de los contenedores */
+.contenedor-cartas h2, .contenedor-condiciones h2, .contenedor-salida h2 { /* Añadido .contenedor-salida h2 aquí */
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    color: #7B3F00;
+    margin-bottom: 15px;
+    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05);
+    margin-top: 10px;
+}
 
-    /*decoración para los contenedores de cartas */
-    .contenedor-cartas::before, .contenedor-condiciones::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 20px;
-        background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 100%);
-        pointer-events: none;
-    }
-    .contenedor-cartas::after, .contenedor-condiciones::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 20px;
-        background: linear-gradient(to top, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 100%);
-        pointer-events: none;
-    }
+/* condiciones: listadas verticalmente, a la izq*/
+.contenedor-condiciones {
+    flex-direction: column;
+    align-items: flex-start;
+    /* margin-left: 80px; Eliminado, el padre maneja el espaciado */
+    width: 380px;
+}
+
+/* quitamos viñetas y márgenes de la lista de condiciones */
+.contenedor-condiciones ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+/* estilos de cada condición individual */
+.contenedor-condiciones li {
+    margin-bottom: 8px;
+    padding-left: 25px;
+    position: relative;
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: #555;
+}
+
+.contenedor-condiciones li::before {
+    content: "•";
+    color: #8B4513;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    font-size: 1.2em;
+    transform: translateY(-2px);
+    margin-left: 1%;
+}
+
+/* Este contenedor ahora será parte de la columna central, así que sus dimensiones serán más flexibles. */
+.contenedor-mesa {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido */
+    border-radius: 15px;
+    width: 600px; /* Permite que el ancho se ajuste */
+    position: relative;
+    overflow: hidden;
+}
+
+/* contenedor donde se muestra la salida de la interacción del usuario*/
+.contenedor-salida {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.15);
+    width: 300px;
+    min-height: 200px;
+    border: 2px solid #D2B48C;
+    position: relative;
+    overflow: visible;
+    /* margin-top: 20px; Eliminado, el padre maneja el espaciado */
+    /* margin-left: 70px; Eliminado, el padre maneja el espaciado */
+}
+
+/* título dentro de la salida */
+.contenedor-salida h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    color: #7B3F00;
+    margin-bottom: 15px;
+    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05);
+    margin-top: 10px;
+}
+
+/* formato del resultado de la salida*/
+.contenedor-salida pre {
+    font-family: 'Cormorant Garamond', serif;
+    color: #5C4033;
+    text-align: center;
+    font-size: 1.1em;
+    white-space: pre-wrap;
+    width: 100%;
+}
 
 
-    /* estilo y efectos para el botón de "Verificar Solución" */
-    .button-brown {
-        background-color: #A0522D; 
-        border: 2px solid #8B4513; 
-    }
+/* carta base: para mujeres cientificas y características */
 
-    .button-brown:hover {
-        background-color: #8B4513; 
-    }
+.carta {
+    width: 120px;
+    height: 80px;
+    background-color: #FDFCEE;
+    border: 1px solid #CCA080;
+    border-radius: 8px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.18);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.2em;
+    cursor: grab;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+    position: relative;
+}
 
-    /* estilo y efectos para el botón de "Generar Solución" */
-    .button-dark-green {
-        background-color: #556B2F; 
-        border: 2px solid #3F4F24; 
-    }
+/*efectos de la carta */
+.carta:hover {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    transform: translateY(-3px);
+}
 
-    .button-dark-green:hover {
-        background-color: #3F4F24; 
-    }
+.carta:active {
+    cursor: grabbing;
+    transform: scale(0.97);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
 
-    /* formato definido para las instrucciones del uso de la interfaz web */
-    .instrucciones {
-        position: absolute;
-        top: 450px; 
-        right: 10px; 
-        font-family: 'Playfair Display', serif;
-        font-weight: 500;
-        font-size: 20px;
-        padding: 15px 25px;
-        max-width: 400px;
-        text-align: left;
-    }
-    
-    /* formato definido para la marca de agua */
-    .marca-agua {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        font-size: 14px;
-        color: rgba(158, 101, 27, 0.3); 
-        pointer-events: none; 
-        z-index: 9999; 
-    }
+/*variantes de los dos tipos de cartas posibles*/
+.persona-carta {
+    background-color: #F8E8E8;
+    border-color: #E6B0AA;
+    color: #9A2C2C;
+}
+
+.caracteristica-carta {
+    background-color: #E8F5E8;
+    border-color: #A7D7B7;
+    color: #388E3C;
+    font-size: 1.2em;
+    text-align: center;
+    line-height: 1.3;
+    padding: 5px;
+}
+
+/* efecto visual mientras se arrastra una carta */
+.dragging {
+    opacity: 0.6;
+    border: 2px dashed #B17E4C;
+    box-shadow: none;
+}
+
+/* propiedades de la mesa circular */
+#mesa-circular {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background-color: #C8E6C9;
+    background-image:
+        linear-gradient(45deg, #DCEAE0 25%, transparent 25%, transparent 75%, #DCEAE0 75%, #DCEAE0),
+        linear-gradient(45deg, #DCEAE0 25%, transparent 25%, transparent 75%, #DCEAE0 75%, #DCEAE0);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    border: 8px double #8B4513;
+    /* margin-top: 100px; Eliminado, el padre maneja el espaciado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.25);
+    flex-shrink: 0;
+    transition: transform 0.3s ease-in-out;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+
+/* texto dentro de la mesa */
+
+#mesa-circular::before {
+    content: "Mesa de Té";
+    font-family: 'Great Vibes', cursive;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.4em;
+    font-weight: bolder;
+    color: rgba(139, 69, 19, 0.6);
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+    letter-spacing: 2px;
+
+}
+
+/* definición de los asientos alrededor de la mesa */
+.asiento-zona {
+    position: absolute;
+    width: 120px;
+    height: 150px;
+    border: 2px dashed #B17E4C;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.85);
+    color: #666;
+    font-size: 0.9em;
+    transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    padding: 6px;
+}
+
+/* estado al arrastrar sobre un asiento */
+.asiento-zona.dragover {
+    background-color: #E6F5E6;
+    border-color: #8B4513;
+    box-shadow: 0 0 18px rgba(139, 69, 19, 0.6);
+}
+
+/*formato del texto del asiento */
+.asiento-zona p {
+    margin: 0;
+    padding: 5px;
+    font-weight: bold;
+    color: #7B3F00;
+}
+
+/* posicionamiento específico de cada asiento alrededor de la mesa (la rodean) */
+.asiento-zona:nth-child(1) { top: 0px; left: 50%; transform: translate(-50%, -50%); }
+.asiento-zona:nth-child(2) { top: 90px; right: 0px; transform: translate(50%, -50%); }
+.asiento-zona:nth-child(3) { bottom: 90px; right: 0px; transform: translate(50%, 50%); }
+.asiento-zona:nth-child(4) { bottom: 0px; left: 50%; transform: translate(-50%, 50%); }
+.asiento-zona:nth-child(5) { bottom: 90px; left: 0px; transform: translate(-50%, 50%) ; }
+.asiento-zona:nth-child(6) { top: 90px; left: 0px; transform: translate(-50%, -50%) ; }
+
+/* cartas dentro de los asientos */
+.asiento-zona > .carta {
+    transform: rotate(0deg) !important;
+    margin-bottom: 5px;
+}
+
+.asiento-persona-slot, .asiento-caracteristica-slot {
+    width: 100px;
+    height: 65px;
+    border: 1px dashed #A08060;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    color: #888;
+    margin: 3px;
+    background-color: rgba(255,255,255,0.7);
+    overflow: hidden;
+    font-weight: 500;
+}
+.asiento-persona-slot.dragover, .asiento-caracteristica-slot.dragover {
+    background-color: #F0FFE0;
+    border-color: #8B4513;
+}
+
+/* posicionamiento de los botones */
+.botones {
+    /* Posicionamiento absoluto eliminado */
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-top: 20px; /* Espacio desde la mesa */
+}
+
+
+/* estilo de los botones */
+button {
+    padding: 12px 25px;
+    font-size: 1.05em;
+    background-color: #A0522D;
+    color: white;
+    border: 2px solid #8B4513;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    letter-spacing: 0.5px;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+}
+
+/* efecto al pasar el mouse sobre el botón */
+button:hover {
+    background-color: #8B4513;
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+}
+
+/* efecto al presionar el botón*/
+button:active {
+    transform: translateY(0);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+/*decoración para los contenedores de cartas */
+.contenedor-cartas::before, .contenedor-condiciones::before, .contenedor-salida::before { /* Añadido .contenedor-salida */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+}
+.contenedor-cartas::after, .contenedor-condiciones::after, .contenedor-salida::after { /* Añadido .contenedor-salida */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(to top, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+}
+
+
+/* estilo y efectos para el botón de "Verificar Solución" */
+.button-brown {
+    background-color: #A0522D;
+    border: 2px solid #8B4513;
+}
+
+.button-brown:hover {
+    background-color: #8B4513;
+}
+
+/* estilo y efectos para el botón de "Generar Solución" */
+.button-dark-green {
+    background-color: #556B2F;
+    border: 2px solid #3F4F24;
+}
+
+.button-dark-green:hover {
+    background-color: #3F4F24;
+}
+
+/* formato definido para las instrucciones del uso de la interfaz web */
+.instrucciones {
+    /* Posicionamiento absoluto eliminado */
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 0.8em;
+    padding: 0px 18px;
+    max-width: 600px;
+    text-align: center; /* Centrado con la tabla */
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+/* formato definido para la marca de agua */
+.marca-agua {
+    position: fixed; /* Mantenemos fijo para que permanezca en la esquina superior izquierda */
+    top: 10px;
+    left: 10px;
+    font-size: 14px;
+    color: rgba(158, 101, 27, 0.3);
+    pointer-events: none;
+    z-index: 9999;
+}

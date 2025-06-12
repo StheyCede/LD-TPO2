@@ -4,26 +4,79 @@
     <meta charset="UTF-8">
     <title>Juego de Lógica de Té [JS, SwiProlog, ScryerProlog]</title>
     <link rel="stylesheet" href="styles.css">
-</head> 
+</head>
 <body>
     <h1>Juego de Lógica: Las Seis Mujeres del Té</h1>
 
-    <div class="game-layout">
-        <div class="contenedor-condiciones">
-            <h2>Pistas del Rompecabezas</h2>
-            <ul>
-                <li>La mujer que admiraba a Marie se sentó enfrente de la señora Ada.</li>
-                <li>La mujer que era profesora se sentó enfrente de la señora Katherine.</li>
-                <li>Katherine, se sentó entre la mujer que era viajera y la mujer que admiraba a Marie.</li>
-                <li>La mujer que odiaba a las polillas se sentó frente a la señora Jane.</li>
-                <li>La mujer que odiaba a las polillas se sentó junto a la mujer que era profesora y a la izquierda de la que admiraba a Marie.</li>
-                <li>La mujer que era viajera se sentó al lado de la señora Katherine.</li>
-                <li>La mujer viajera se sentó al lado de Ada.</li>
-                <li>Ada se sentó enfrente de la mujer que admiraba a Marie.</li>
-                <li>La señora Chien se sentó junto a la mujer odia las polillas y enfrente de la dueña de casa.</li>
-            </ul>
+    <div class="main-content-wrapper">
+
+        <div class="left-column">
+            <div class="contenedor-condiciones">
+                <h2>Pistas del Rompecabezas</h2>
+                <ul>
+                    <li>La mujer que admiraba a Marie se sentó enfrente de la señora Ada.</li>
+                    <li>La mujer que era profesora se sentó enfrente de la señora Katherine.</li>
+                    <li>Katherine, se sentó entre la mujer que era viajera y la mujer que admiraba a Marie.</li>
+                    <li>La mujer que odiaba a las polillas se sentó frente a la señora Jane.</li>
+                    <li>La mujer que odiaba a las polillas se sentó junto a la mujer que era profesora y a la izquierda de la que admiraba a Marie.</li>
+                    <li>La mujer que era viajera se sentó al lado de la señora Katherine.</li>
+                    <li>La mujer viajera se sentó al lado de Ada.</li>
+                    <li>Ada se sentó enfrente de la mujer que admiraba a Marie.</li>
+                    <li>La señora Chien se sentó junto a la mujer odia las polillas y enfrente de la dueña de casa.</li>
+                </ul>
+            </div>
         </div>
-        <div class="cards-container">
+
+        <div class="middle-column">
+            <div class="instrucciones">
+                <p>
+                    Arrastrá las cartas de las científicas a los asientos y las características a sus lugares correspondientes.<br><br>
+                    Luego, hacé clic en <strong>'Verificar Solución'</strong> para comprobar la validez de tu combinación.<br><br>
+                    También podés clickear <strong>'Generar Solución'</strong> para ver alguna solución al problema lógico.
+                </p>
+            </div>
+            <div class="contenedor-mesa">
+                <div id="mesa-circular">
+                    <div class="asiento-zona" id="1">
+                        <p>Asiento 1</p>
+                        <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
+                        <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
+                    </div>
+                    <div class="asiento-zona" id="2">
+                        <p>Asiento 2</p>
+                        <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
+                        <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
+                    </div>
+                    <div class="asiento-zona" id="3">
+                        <p>Asiento 3</p>
+                        <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
+                        <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
+                    </div>
+                    <div class="asiento-zona" id="4">
+                        <p>Asiento 4</p>
+                        <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
+                        <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
+                    </div>
+                    <div class="asiento-zona" id="5">
+                        <p>Asiento 5</p>
+                        <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
+                        <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
+                    </div>
+                    <div class="asiento-zona" id="6">
+                        <p>Asiento 6</p>
+                        <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
+                        <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
+                    </div>
+                </div>
+            </div>
+            <div class="botones">
+                <button id="checkSolutionButton" class="button-brown">Verificar Solución</button>
+                <button id="generateSolutionButton" class="button-dark-green">Generar Solución</button>
+                <button id="restart" class="button-dark-red">Reiniciar</button>
+            </div>
+        </div>
+
+        <div class="right-column">
             <div class="contenedor-cartas" id="personas-disponibles">
                 <h2>Personas</h2>
                 <div class="carta persona-carta" id="jane" draggable="true">Jane</div>
@@ -43,64 +96,15 @@
                 <div class="carta caracteristica-carta" id="viajera" draggable="true">Viajera</div>
                 <div class="carta caracteristica-carta" id="duena_casa" draggable="true">Dueña de Casa</div>
             </div>
-        </div>
-
-        <div id="mesa-circular">
-            <div class="asiento-zona" id="1">
-                <p>Asiento 1</p>
-                <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
-                <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
-            </div>
-            <div class="asiento-zona" id="2">
-                <p>Asiento 2</p>
-                <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
-                <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
-            </div>
-            <div class="asiento-zona" id="3">
-                <p>Asiento 3</p>
-                <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
-                <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
-            </div>
-            <div class="asiento-zona" id="4">
-                <p>Asiento 4</p>
-                <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
-                <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
-            </div>
-            <div class="asiento-zona" id="5">
-                <p>Asiento 5</p>
-                <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
-                <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
-            </div>
-            <div class="asiento-zona" id="6">
-                <p>Asiento 6</p>
-                <div class="asiento-persona-slot" data-slot-type="persona">Coloca Persona</div>
-                <div class="asiento-caracteristica-slot" data-slot-type="caracteristica">Coloca Característica</div>
+            <div class="contenedor-salida">
+                <h2>Salida</h2>
+                <div id="output"></div>
             </div>
         </div>
 
-        <div class="contenedor-salida">
-            <h2>Salida</h2>
-            <div id="output"></div>
-        </div>
-    </div>
-
-    <div class="botones">
-        <button id="checkSolutionButton" class="button-brown">Verificar Solución</button>
-        <button id="generateSolutionButton" class="button-dark-green">Generar Solución</button>
-        <button id="restart" class="button-dark-red">Reiniciar</button>
-    </div>
-
-    <div class="instrucciones">
-        <p>
-            Arrastrá las cartas de las científicas a los asientos y las características a sus lugares correspondientes.<br><br>
-            Luego, hace clic en <strong>'Verificar Solución'</strong> para comprobar la válidez de tu combinación.<br><br>
-            También podes clickear <strong>'Generar Solución'</strong> para ver alguna solución al problema lógico.
-        </p>
-    </div>
-    
-    <div class="marca-agua">Lenguajes Declarativos - Grupo: Paula Coronel, Sthefany Cedeño, Antonio Sarmiento</div>
+    </div> <div class="marca-agua">Lenguajes Declarativos - Grupo: Paula Coronel, Sthefany Cedeño, Antonio Sarmiento</div>
     <script type="module" src="./main.js"></script>
     <script type="module" src="./dragdrop.js"></script>
-    
+
 </body>
 </html>
